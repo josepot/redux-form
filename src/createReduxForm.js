@@ -533,6 +533,7 @@ const createReduxForm = (structure: Structure<*, *>) => {
         }
 
         shouldComponentUpdate(nextProps: PropsWithContext): boolean {
+          debugger
           if (!this.props.pure) return true
           const { immutableProps = [] } = config
           // if we have children, we MUST update in React 16
@@ -588,6 +589,7 @@ const createReduxForm = (structure: Structure<*, *>) => {
           getValidator: Function,
           getWarner: Function
         ) => {
+          debugger
           const lastCount = this.fieldCounts[name]
           const nextCount = (lastCount || 0) + 1
           this.fieldCounts[name] = nextCount
@@ -990,6 +992,7 @@ const createReduxForm = (structure: Structure<*, *>) => {
 
       const connector = connect(
         (state, props) => {
+          debugger
           const {
             form,
             getFormState,
@@ -1025,7 +1028,9 @@ const createReduxForm = (structure: Structure<*, *>) => {
           const syncErrors = getIn(formState, 'syncErrors') || plain.empty
           const syncWarnings = getIn(formState, 'syncWarnings') || plain.empty
           const registeredFields = getIn(formState, 'registeredFields')
+          debugger
           const valid = isValid(form, getFormState, false)(state)
+          console.log('VALID', valid)
           const validExceptSubmit = isValid(form, getFormState, true)(state)
           const anyTouched = !!getIn(formState, 'anyTouched')
           const submitting = !!getIn(formState, 'submitting')
